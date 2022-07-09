@@ -28,6 +28,3 @@ else
 {
 largest = b;
 }
-
-return (largest);
-}
