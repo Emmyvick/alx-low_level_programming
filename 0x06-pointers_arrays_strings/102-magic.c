@@ -1,5 +1,3 @@
-es (14 sloc)  186 Bytes
-
 #include <stdio.h>
 
 int main(void)
