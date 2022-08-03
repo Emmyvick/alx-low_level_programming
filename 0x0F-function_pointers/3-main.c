@@ -1,26 +1,27 @@
-#include <stdio.h>
-#include <stdlib.h>
+/*
+ * File: 3-main.c
+ * Author: Yovo Koffi Vianney
+ */
 #include "3-calc.h"
 
 /**
- * main - operations between intergers
- * @argv: argument value array
- * @argc: argument counter
- * Return: result of the operation
+ * main - performs simple operations
+ * @argc: argument count
+ * @argv: argument vector
+ * Return: 0 if no errors
  */
-
 int main(int argc, char *argv[])
 {
-int num1, num2, op;
+	register int a, b;
+	int (*fptr)(int, int);
 
-if (argc != 4)
-{
-printf("Error\n");
-exit(98);
-}
-num1 = atoi(argv[1]);
-num2 = atoi(argv[3]);
-op = (*get_op_func(argv[2]))(num1, num2);
-printf("%d\n", op);
-return (0);
+	if (argc != 4)
+		printf("Error\n"), exit(98);
+	fptr = get_op_func(argv[2]);
+	if (!fptr)
+		printf("Error\n"), exit(99);
+	a = atoi(argv[1]);
+	b = atoi(argv[3]);
+	printf("%i\n", fptr(a, b));
+	return (0);
 }
