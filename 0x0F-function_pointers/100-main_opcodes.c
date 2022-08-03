@@ -1,49 +1,34 @@
-#include <stdlib.h>
-#include <stdio.h>
+/*
+ * File: 100-main_opcodes.c
+ * Author: Emmyvick
+ */
+#include "function_pointers.h"
+
+/*
+*Intresting note: functions are a set of instruction and
+*function pointers are pointers to the begning of this instruction
+*so if we could get the first instrucions adress inmemory
+*we can see what it is doing by printing the adresses
+*/
 
 /**
- * print_opcodes - print the opcodes of this program
- * @a: address of the main function
- * @n: number of bytes to print
- *
- * Return: void
+ * main - print opcodes of its own main function
+ * @argc: number of arguments
+ * @argv: vector of arguments
+ * Return: 0 if no errors
  */
-void print_opcodes(char *a, int n)
+int main(int argc, char *argv[])
 {
-int i;
+	register int i, num;
+	char *ptr = (char *)main;
 
-for (i = 0; i < n; i++)
-{
-printf("%.2hhx", a[i]);
-if (i < n - 1)
-printf(" ");
-}
-printf("\n");
-
-}
-
-/**
- * main - print the opcodes og its own main function
- * @argc: number of arguments passed to the function
- * @rgv: array of pointers to arguments
- *
- * Return: 0 if successful
- */
-int main(int argc, char **argv)
-{
-int n;
-
-if (argc != 2)
-{
-printf("Error\n");
-exit(1);
-}
-n = atoi(argv[1]);
-if (n < 0)
-{
-printf("Error\n");
-exit(2);
-}
-print_opcodes((char *)&main, n);
-return (0);
+	if (argc != 2)
+		printf("Error\n"), exit(1);
+	num = atoi(argv[1]);
+	if (num < 0)
+		printf("Error\n"), exit(2);
+	for (i = 0; i < num - 1; i++)
+		printf("%02hhx ", ptr[i]);
+	printf("%02hhx\n", ptr[i]);
+	return (0);
 }
